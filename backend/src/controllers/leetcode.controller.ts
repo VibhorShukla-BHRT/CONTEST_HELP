@@ -8,11 +8,10 @@ const getDetails = async(req: Request, res: Response)=>{
     res.send("ok");
 }
 const upcomingContest = async (req: Request, res: Response) => {
+    await getUpcomingContests();
     const allContests = await contestModel.find(); // Get all contests
     //@ts-ignore
-    const upcoming = allContests.filter(contest => !contest.expired); // Filter in JS
-    await getUpcomingContests();
-    console.log("Upcoming Contests: ", upcoming);
+    const upcoming = allContests.filter(contest => (!contest.expired && contest.platform==='leetcode')); // Filter in JS
     res.send(upcoming);
 };
 export {

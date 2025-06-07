@@ -25,13 +25,13 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    bookmarked: [{type: mongoose.Schema.Types.ObjectId, ref: "Contests"}]
 })
 const contestSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     start_date: {
         type: Date,

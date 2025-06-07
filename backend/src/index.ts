@@ -4,6 +4,8 @@ import connectDatabase from "./db/conn.db";
 import cookieParser from "cookie-parser";
 import dotevn from "dotenv";
 import leetcodeRouter from "./routes/leetcode.route";
+import cfRouter from "./routes/codeforces.route";
+import ccRouter from "./routes/codechef.route";
 dotevn.config();
 connectDatabase();
 const app = express();
@@ -17,6 +19,8 @@ app.get('/api/2025',(req:Request,res:Response)=>{
     res.send("SERVER RESPONDING");
 })
 app.use('/api/leetcode',leetcodeRouter);
+app.use('/api/codeforces',cfRouter);
+app.use('/api/codechef',ccRouter);
 // app.use('/ap1/codeforces',);
 // app.use('/api/codechef',);
 app.listen(PORT,()=>{

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { populateContestsLC } from "../services/leetcode.service";
+import { populateCfContests } from "../services/codeforces.service";
 dotenv.config();
 
 const conn_url = process.env.MONGO_URL!;
@@ -14,9 +15,10 @@ export default async function connectDatabase(): Promise<void> {
         const collectionNames = collections.map(col => col.name);
 
         if (collectionNames.length==0) {
-            console.log("No users collection found, assuming a fresh database.");
+            console.log("Populating database...")
             await populateContestsLC("test00069");
-            console.log("Database populated successfully.");
+            await populateCfContests();
+            console.log("Database populated successfully!");
         }
     } catch (error) {
         console.log("Error connecting to MongoDB Atlas: ", error);
